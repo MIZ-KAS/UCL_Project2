@@ -20,7 +20,7 @@ variables:
   projectRoot: $(System.DefaultWorkingDirectory)
 
   # Python version: 3.7
-  pythonVersion: '3.7'
+  pythonVersion: '3.7.15'
   architecture: x64
 
 stages:
@@ -30,10 +30,13 @@ stages:
   - job: BuildJob
     pool: myAgentPool
     steps:
-    - task: UsePythonVersion@0
-      inputs:
-        versionSpec: '$(pythonVersion)'
-      displayName: 'Use Python $(pythonVersion)'
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '$(pythonVersion)'
+      allowUnstable: true
+      addToPath: true
+      architecture: 'x64'
+    displayName: 'Use Python $(pythonVersion)'
 
     - script: |
         python -m venv antenv
