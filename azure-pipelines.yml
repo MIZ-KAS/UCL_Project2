@@ -20,7 +20,7 @@ variables:
   projectRoot: $(System.DefaultWorkingDirectory)
 
   # Python version: 3.7
-  pythonVersion: '3.7.15'
+  pythonVersion: '3.7'
   architecture: x64
 
 stages:
@@ -82,6 +82,7 @@ stages:
             displayName: 'Deploy Azure Web App : sundaydemo'
             inputs:
               azureSubscription: '$(azureServiceConnectionId)'
-              appType: 'webAppLinux'
+              appType: 'webApp'
               appName: '$(webAppName)'
               package: '$(Pipeline.Workspace)/drop/$(Build.BuildId).zip'
+              deploymentMethod: 'auto'
